@@ -17,30 +17,32 @@ screen.tracer(0)
 #Setting up initial snake segments for game startup
 snake = Snake("square","green")
 snake.create_snake()
+
+#Creating food object
 food = Food()
 
+#Setting on-click feature for turtle movement
 screen.onkey(snake.up,key="Up")
 screen.onkey(snake.down,"Down")
 screen.onkey(snake.right,"Right")
 screen.onkey(snake.left,"Left")
 
-# #Turning off the tracer method once all 3 initial segments of snake are created.
-# screen.update()   
-
 score = 0
+
+#Creating a turtle object for a scoreboard.
 scoreboard = Score(score)
 
 def detect_tail_collison():
+    '''Function to detect collision of the snake with tail'''
     for i in range(1,len(snake.snake_segments)):
         if snake.snake_segments[0].distance(snake.snake_segments[i]) < 10:
             return True
     return False       
-    
-        
+          
 game_is_on = True
 while game_is_on:
     snake.move()
-    screen.update()
+    screen.update() # #Turning off the tracer method once all 3 initial segments of snake are created and on each movement
     time.sleep(0.1)
     
     #Detecting Collision with Food & Updating Scoreboard

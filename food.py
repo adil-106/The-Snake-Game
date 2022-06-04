@@ -13,6 +13,7 @@ class Food(Turtle):
         self.refresh()
         
     def refresh(self):
+        '''Method to re-locate the food after every collision with the snake'''
         rand_x = random.randint(-270,270)
         rand_y = random.randint(-270,270)
         self.goto(rand_x,rand_y)
