@@ -48,6 +48,13 @@ class Snake():
         seg.color(self.color)
         self.snake_segments.append(seg)
         
+    def reset_snake(self):
+        for snakes in self.snake_segments:
+            snakes.goto(1000,1000)
+        self.snake_segments.clear()
+        self.snake_segments = []
+        self.create_snake()
+        
     
     
     

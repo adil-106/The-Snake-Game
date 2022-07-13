@@ -27,10 +27,10 @@ screen.onkey(snake.down,"Down")
 screen.onkey(snake.right,"Right")
 screen.onkey(snake.left,"Left")
 
-score = 0
+
 
 #Creating a turtle object for a scoreboard.
-scoreboard = Score(score)
+scoreboard = Score()
 
 def detect_tail_collison():
     '''Function to detect collision of the snake with tail'''
@@ -47,22 +47,28 @@ while game_is_on:
     
     #Detecting Collision with Food & Updating Scoreboard
     if snake.snake_segments[0].distance(food) < 15:
-        score += 1
+        scoreboard.score += 1
         scoreboard.refresh()
         food.refresh()
-        scoreboard = Score(score)
+        #scoreboard = Score(score)
         screen.tracer(0)
         snake.add_segment()
     
     #Detecting Collison with Wall
     if snake.snake_segments[0].xcor() < -280 or snake.snake_segments[0].ycor() < -280 or snake.snake_segments[0].xcor() > 280 or snake.snake_segments[0].ycor() > 280:
-        scoreboard.game_over_wall()
-        game_is_on = False
+        #scoreboard.game_over_wall()
+        
+        scoreboard.reset_score()
+        #game_is_on = False
+        snake.reset_snake()
     
     #Detecting Collison with Tail
     if detect_tail_collison():
-        scoreboard.game_over_tail()
-        game_is_on = False
+        #scoreboard.game_over_tail()
+        
+        scoreboard.reset_score()
+        #game_is_on = False
+        snake.reset_snake()
        
 
 screen.exitonclick()
