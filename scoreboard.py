@@ -10,7 +10,9 @@ class Score(Turtle):
         super().__init__()
         self.hideturtle()
         self.score = 0
-        self.high_score = 0
+        with open("high_Score.txt") as file:
+            contents = file.read()
+            self.high_score = int(contents)
         self.penup()
         self.setpos(0,270)
         self.pendown()
@@ -19,6 +21,9 @@ class Score(Turtle):
         
     def refresh(self):
         self.clear()
+        with open("high_Score.txt") as file:
+            contents = file.read()
+            self.high_score = int(contents)
         self.write(f"Score: {self.score}    High Score: {self.high_score}", move=False, align=ALIGNMENT, font=FONT)
     
     def game_over_wall(self):
@@ -31,7 +36,8 @@ class Score(Turtle):
         
     def reset_score(self):
         if self.score > self.high_score:
-            self.high_score = self.score
+            with open("high_Score.txt",mode="w") as file:
+                self.high_score = file.write(str(self.score))
         self.score = 0
         self.refresh()
         #self.write(f"Score: {self.score}    High Score:{self.high_score}", move=False, align=ALIGNMENT, font=FONT)
